@@ -1,6 +1,6 @@
 ﻿namespace Domain.Entities
 {
-    public class SberSystem : BaseCatalog
+    public class State : BaseCatalog
     {
     }
 }

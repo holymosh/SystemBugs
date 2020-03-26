@@ -12,12 +12,14 @@ namespace Domain.Entities
         public SberSystem System { get; set; }
         public string Summary { get; set; }
 
-        public string State { get; set; }
+        public int StateId { get; set; }
+        public State State { get; set; }
         public string Found { get; set; }
 
-        public string CriticalLevel { get; set; }
+        public CriticalLevel CriticalLevel { get; set; }
 
-        public string DegectType { get; set; }
+        public int DefectTypeId { get; set; }
+        public DefectType DefectType { get; set; }
 
         public DateTime CreationDate { get; set; }
 
@@ -25,8 +27,14 @@ namespace Domain.Entities
 
         public DateTime? ClosingDate { get; set; }
 
-        public string DetectionMethod { get; set; }
+        public int DetectionMethodId { get; set; }
+        public DetectionMethod DetectionMethod { get; set; }
 
         public int? ReopensAmount { get; set; }
+    }
+
+    public enum CriticalLevel
+    {
+
     }
 }
