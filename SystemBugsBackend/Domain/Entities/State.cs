@@ -1,6 +1,6 @@
 ﻿namespace Domain.Entities
 {
-    public class State : BaseCatalog
+    public class State : BaseEntityWithTitle
     {
     }
 }

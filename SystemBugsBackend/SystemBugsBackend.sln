@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemBugsBackend", "System
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{090A8703-860C-405E-AA68-BCC4C6F907DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbAccess", "DbAccess\DbAccess.csproj", "{FB6FA45C-C24D-4C94-904B-F7D56F6CCFEA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{090A8703-860C-405E-AA68-BCC4C6F907DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{090A8703-860C-405E-AA68-BCC4C6F907DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{090A8703-860C-405E-AA68-BCC4C6F907DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB6FA45C-C24D-4C94-904B-F7D56F6CCFEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB6FA45C-C24D-4C94-904B-F7D56F6CCFEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB6FA45C-C24D-4C94-904B-F7D56F6CCFEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB6FA45C-C24D-4C94-904B-F7D56F6CCFEA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
