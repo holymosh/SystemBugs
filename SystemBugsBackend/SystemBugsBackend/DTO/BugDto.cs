@@ -1,40 +1,42 @@
 ﻿using System;
 using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace SystemBugsBackend.DTO
 {
     public class BugDto
     {
-        [JsonPropertyName("ID")]
+        [JsonProperty("ID")]
         public int Id { get; set; }
 
         public string System { get; set; }
         public string Summary { get; set; }
 
-        [JsonPropertyName("Состояние")]
+        [JsonProperty("Состояние")]
         public string State { get; set; }
-        [JsonPropertyName("Найдено при")]
+
+        [JsonProperty("Найдено при")]
         public string Found { get; set; }
 
-        [JsonPropertyName("Критичность")]
+        [JsonProperty("Критичность")]
         public string CriticalLevel { get; set; }
 
-        [JsonPropertyName("Тип Дефекта")]
+        [JsonProperty("Тип Дефекта")]
         public string DegectType { get; set; }
 
-        [JsonPropertyName("Дата создания")]
+        [JsonProperty("Дата создания")]
         public DateTime CreationDate { get; set; }
 
-        [JsonPropertyName("Дата изменения")]
+        [JsonProperty("Дата изменения")]
         public DateTime ChangeDate { get; set; }
 
-        [JsonPropertyName("Дата закрытия")]
+        [JsonProperty("Дата закрытия")]
         public DateTime? ClosingDate { get; set; }
 
-        [JsonPropertyName("Метод обнаружения")]
+        [JsonProperty("Метод обнаружения")]
         public string DetectionMethod { get; set; }
 
-        [JsonPropertyName("reopens_amount")]
+        [JsonProperty("reopens_amount")]
         public int? ReopensAmount { get; set; }
 
 

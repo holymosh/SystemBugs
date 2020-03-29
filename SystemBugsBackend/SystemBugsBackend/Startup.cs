@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using SystemBugsBackend.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -25,6 +22,8 @@ namespace SystemBugsBackend
         {
             services.AddControllersWithViews();
             services.RegisterDb();
+            var reader = new BugsForTestReader();
+            reader.Read();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
