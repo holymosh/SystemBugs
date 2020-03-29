@@ -16,6 +16,7 @@ namespace Domain.Entities
         public State State { get; set; }
         public string Found { get; set; }
 
+        public int CriticalLevelId { get; set; }
         public CriticalLevel CriticalLevel { get; set; }
 
         public int DefectTypeId { get; set; }
@@ -33,8 +34,4 @@ namespace Domain.Entities
         public int? ReopensAmount { get; set; }
     }
 
-    public enum CriticalLevel
-    {
-
-    }
 }
