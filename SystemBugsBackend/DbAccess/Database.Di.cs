@@ -11,10 +11,10 @@ namespace DbAccess
         public static void RegisterDb(this IServiceCollection serviceCollection)
         {
             var connectionString =
-                @"Server=.\SQLExpress;Database=myDataBase;Integrated Security=True;Asynchronous Processing=True;";
+                @"Server=.\SQLExpress;Database=SystemBugs;Integrated Security=True;";
             serviceCollection.AddEntityFrameworkSqlServer().AddDbContext<DomainDbContext>(builder => builder.UseSqlServer(connectionString));
 
-            serviceCollection.AddScoped(typeof(IGenericRepository<>),typeof(EfGenericRepository<>));
+            serviceCollection.AddScoped(typeof(IRepository<>),typeof(EfRepository<>));
             
 
         }

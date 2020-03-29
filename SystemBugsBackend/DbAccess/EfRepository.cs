@@ -8,43 +8,55 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DbAccess
 {
-    public class EfGenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseEntity
+    public class EfRepository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
     {
         private readonly DbContext _context;
-        private readonly DbSet<TEntity> _dbSet;
+        public DbSet<TEntity> DbSet { get; }
 
-        public EfGenericRepository(DomainDbContext context)
+        public EfRepository(DomainDbContext context)
         {
             _context = context;
-            _dbSet = context.Set<TEntity>();
+            DbSet = context.Set<TEntity>();
         }
 
+        public void Create(TEntity entity)
+        {
+            DbSet.Add(entity);
+            _context.SaveChanges();
+        }
 
         public async Task CreateAsync(TEntity entity)
         {
-            await _dbSet.AddAsync(entity);
+            await DbSet.AddAsync(entity);
             await _context.SaveChangesAsync();
         }
 
+        public void CreateRange(IEnumerable<TEntity> entities)
+        {
+            DbSet.AddRange(entities);
+            _context.SaveChanges();
+        }
+
+
         public async Task<TEntity> FindById(int id)
         {
-            var result = await _dbSet.FindAsync(id);
+            var result = await DbSet.FindAsync(id);
             return result;
         }
 
         public IQueryable<TEntity> GetAll()
         {
-            return _dbSet.AsNoTracking();
+            return DbSet.AsNoTracking();
         }
 
         public IQueryable<TEntity> Filter(Expression<Func<TEntity, bool>> predicate)
         {
-            return _dbSet.AsNoTracking().Where(predicate);
+            return DbSet.AsNoTracking().Where(predicate);
         }
 
         public async Task RemoveAsync(TEntity entity)
         {
-            _dbSet.Remove(entity);
+            DbSet.Remove(entity);
             await _context.SaveChangesAsync();
         }
 

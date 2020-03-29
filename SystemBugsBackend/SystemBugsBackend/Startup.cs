@@ -22,8 +22,10 @@ namespace SystemBugsBackend
         {
             services.AddControllersWithViews();
             services.RegisterDb();
-            var reader = new BugsForTestReader();
-            reader.Read();
+            services.AddSingleton<IBugsForTestHandler, BugsForTestHandler>();
+            var serviceProvider = services.BuildServiceProvider();
+            var reader = (IBugsForTestHandler) serviceProvider.GetService(typeof(IBugsForTestHandler));
+            reader.Handle();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -33,5 +33,4 @@ namespace Domain.Entities
 
         public int? ReopensAmount { get; set; }
     }
-
 }
