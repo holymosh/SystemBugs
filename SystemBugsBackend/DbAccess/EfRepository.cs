@@ -46,7 +46,7 @@ namespace DbAccess
 
         public IQueryable<TEntity> GetAll()
         {
-            return DbSet.AsNoTracking();
+            return DbSet.AsQueryable();
         }
 
         public IQueryable<TEntity> Filter(Expression<Func<TEntity, bool>> predicate)

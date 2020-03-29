@@ -22,7 +22,7 @@ namespace SystemBugsBackend.DTO
         public string CriticalLevel { get; set; }
 
         [JsonProperty("Тип Дефекта")]
-        public string DegectType { get; set; }
+        public string DefectType { get; set; }
 
         [JsonProperty("Дата создания")]
         public DateTime CreationDate { get; set; }

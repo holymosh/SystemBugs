@@ -11,6 +11,7 @@ namespace DbAccess
     public interface IRepository<TEntity> where TEntity : BaseEntity
     {
         Task CreateAsync(TEntity entity);
+        void Create(TEntity entity);
         void CreateRange(IEnumerable<TEntity> entities);
         Task<TEntity> FindById(int id);
         IQueryable<TEntity> GetAll();
