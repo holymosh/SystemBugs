@@ -350,3 +350,32 @@ MigrationBackup/
 .ionide/
 SystemBugsBackend/SystemBugsBackend/wwwroot/
 SystemBugsBackend/SystemBugsBackend/bugs_for_test.json
+
+# js ignore
+.DS_Store
+Thumbs.db
+db.json
+*.log
+node_modules/
+public/
+.deploy*/
+src/_drafts
+package-lock.json
+# webpack ignore 
+/node_modules
+/test/js
+/test/browsertest/js
+/test/fixtures/temp-*
+/test/temp
+/test/ChangesAndRemovals
+/benchmark/js
+/benchmark/fixtures
+/examples/**/dist
+/coverage
+.DS_Store
+*.log
+.idea
+.vscode
+.cache
+.eslintcache
+package-lock.json
