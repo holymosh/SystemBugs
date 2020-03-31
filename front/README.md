@@ -1,6 +1,6 @@
-# system-bug-front
+# front
 
-> test task
+> test
 
 ## Build Setup
 

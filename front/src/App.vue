@@ -1,21 +1,21 @@
 <template>
   <div id="app">
-    <BugComponent/>
+    <BugData/>
   </div>
 </template>
 
 <script>
-import BugComponent from './components/BugComponent'
+import BugData from './components/BugData'
 
 export default {
   name: 'App',
   components: {
-    BugComponent
+    BugData
   }
 }
 </script>
 
-<style>
+<style >
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
