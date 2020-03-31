@@ -23,9 +23,9 @@ namespace SystemBugsBackend
             services.AddControllersWithViews();
             services.RegisterDb();
             services.AddSingleton<IBugsForTestHandler, BugsForTestHandler>();
-            var serviceProvider = services.BuildServiceProvider();
-            var reader = (IBugsForTestHandler) serviceProvider.GetService(typeof(IBugsForTestHandler));
-            reader.Handle();
+            //var serviceProvider = services.BuildServiceProvider();
+            //var reader = (IBugsForTestHandler) serviceProvider.GetService(typeof(IBugsForTestHandler));
+            //reader.Handle();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +44,7 @@ namespace SystemBugsBackend
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseCors(b => b.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseEndpoints(endpoints =>
             {
