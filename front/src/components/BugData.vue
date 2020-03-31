@@ -1,7 +1,35 @@
 <template>
   <v-card>
     <v-card-title>
-      Data table
+      <v-select
+            :items="systems"
+            label="Система"
+            dense
+            outlined
+            attach
+            width="50px"
+          >
+    </v-select>
+    <v-spacer></v-spacer>
+    <v-select
+            :items="systems"
+            label="Критичность"
+            dense
+            outlined
+            attach
+            width="50px"
+          >
+    </v-select>
+    <v-spacer></v-spacer>
+          <v-text-field
+            v-model="pickerFrom"
+            label="С"
+          ></v-text-field>
+      <v-spacer></v-spacer>
+          <v-text-field
+            v-model="pickerFrom"
+            label="По"
+          ></v-text-field>
       <v-spacer></v-spacer>
       <v-text-field
         v-model="search"
@@ -41,7 +69,31 @@ export default {
         { text: 'Закрыто', value: 'closingDate' },
         { text: 'Обнаружения', value: 'reopnesAmount' }
       ],
-      tableData: []
+      tableData: [],
+      systems: ['1', '2'],
+      criticalLevels: ['3', '4'],
+      pickerTo: new Date().toLocaleString().substr(0, 10),
+      pickerFrom: new Date().toLocaleString().substr(0, 10),
+      modal: false
+    }
+  },
+  created () {
+    this.initialize()
+  },
+  methods: {
+    initialize () {
+      this.getSystemFilter()
+      this.getCriticalLevelFilter()
+      this.loadData()
+    },
+    loadData () {
+      console.log('loading.......')
+    },
+    getSystemFilter () {
+      console.log('http req for systems')
+    },
+    getCriticalLevelFilter () {
+      console.log('http req for critical level')
     }
   }
 }
