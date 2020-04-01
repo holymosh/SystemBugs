@@ -63,10 +63,33 @@
       :search="search"
       :items-per-page="5"
     ></v-data-table>
+
+    <v-sparkline
+    style="width: 50%"
+    :value="value"
+    :gradient="gradient"
+    :smooth="radius || false"
+    :padding="padding"
+    :line-width="width"
+    :stroke-linecap="lineCap"
+    :gradient-direction="gradientDirection"
+    :fill="fill"
+    :type="type"
+    :auto-line-width="autoLineWidth"
+    auto-draw
+  ></v-sparkline>
   </v-card>
 </template>
 
 <script>
+const gradients = [
+    ['#222'],
+    ['#42b3f4'],
+    ['red', 'orange', 'yellow'],
+    ['purple', 'violet'],
+    ['#00c6ff', '#F0F', '#FF0'],
+    ['#f72047', '#ffd200', '#1feaea'],
+  ]
 export default {
   data () {
     return {
@@ -96,6 +119,17 @@ export default {
       modal: false,
       selectedSystem: {id:0, title: ''},
       selectedLevel: {id:0, title: ''},
+      width: 2,
+      radius: 10,
+      padding: 8,
+      lineCap: 'round',
+      gradient: gradients[5],
+      value: [],
+      gradientDirection: 'top',
+      gradients,
+      fill: false,
+      type: 'trend',
+      autoLineWidth: false,
     }
   },
   created () {
@@ -117,6 +151,10 @@ export default {
           if(item.closingDate) item.closingDate = new Date(item.closingDate).toLocaleString()
         });
         this.tableData = r;
+        let map = new Map();
+        r.map(el => new Date(el.creationDate).getDate())
+        .forEach((item) => map.set(item,(map.get(item) || 0)+ 1));
+        this.value = [...map.keys()].sort(function(a,b){ return a-b}).map(el => map.get(el))
       })
     },
     getSystemFilter () {
