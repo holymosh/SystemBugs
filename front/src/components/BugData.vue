@@ -106,7 +106,15 @@ export default {
     loadData (url) {
       fetch(url,{
         mode: "cors"
-      }).then(r=> r.json()).then(r => this.tableData = r)
+      }).then(r=> r.json()).then(r => {
+        r.forEach((item,index,arr) => {
+          let current = arr[index];
+          current.creationDate = new Date(current.creationDate).toLocaleString()
+          current.changeDate = new Date(current.changeDate).toLocaleString()
+          if(current.closingDate) current.closingDate = new Date(current.closingDate).toLocaleString()
+        });
+        this.tableData = r;
+      })
     },
     getSystemFilter () {
       let url = 'http://localhost:56160/datasource/system'
