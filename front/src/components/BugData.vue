@@ -7,7 +7,7 @@
             dense
             outlined
             attach
-            width="50px"
+            style="width: 40px"
             v-model="selectedSystem"
           >
            <template slot="selection" slot-scope="data">
@@ -24,8 +24,8 @@
             dense
             outlined
             attach
-            width="50px"
-            v-model="selectedLevel"
+            style="width: 60px"
+            v-model="selectedLevel" 
           >
           <template slot="selection" slot-scope="data">
                                   {{data.item.title}}
@@ -44,6 +44,10 @@
             v-model="pickerTo"
             label="По"
           ></v-text-field>
+      <v-spacer></v-spacer>
+      <div class="my-2">
+        <v-btn @click="apply" small>Filter</v-btn>
+      </div>
       <v-spacer></v-spacer>
       <v-text-field
         v-model="search"
@@ -83,6 +87,7 @@ export default {
         { text: 'Закрыто', value: 'closingDate' },
         { text: 'Обнаружения', value: 'reopensAmount' }
       ],
+      dataSourceBaseUrl: 'http://localhost:56160/data/get',
       tableData: [],
       systems: [],
       levels: [],
@@ -98,26 +103,24 @@ export default {
   },
   methods: {
     initialize () {
-      this.getSystemFilter()
-      this.getCriticalLevelFilter()
-      let url = 'http://localhost:56160/data/get'
-      this.loadData(url)
+      this.getSystemFilter();
+      this.getCriticalLevelFilter();
+      this.loadData(this.dataSourceBaseUrl);
     },
     loadData (url) {
       fetch(url,{
         mode: "cors"
       }).then(r=> r.json()).then(r => {
-        r.forEach((item,index,arr) => {
-          let current = arr[index];
-          current.creationDate = new Date(current.creationDate).toLocaleString()
-          current.changeDate = new Date(current.changeDate).toLocaleString()
-          if(current.closingDate) current.closingDate = new Date(current.closingDate).toLocaleString()
+        r.forEach((item) => {
+          item.creationDate = new Date(item.creationDate).toLocaleString()
+          item.changeDate = new Date(item.changeDate).toLocaleString()
+          if(item.closingDate) item.closingDate = new Date(item.closingDate).toLocaleString()
         });
         this.tableData = r;
       })
     },
     getSystemFilter () {
-      let url = 'http://localhost:56160/datasource/system'
+      let url = 'http://localhost:56160/datasource/system';
       var data = null;
       fetch(url,{
         mode: "cors"
@@ -129,6 +132,31 @@ export default {
       fetch(url,{
         mode: "cors"
       }).then(r=> r.json()).then(r => this.levels = r)
+    },
+    apply () {
+      let queryStr = '?';
+      let selectedSystem = this.selectedSystem;
+      let selectedLevel = this.selectedLevel;
+      let pickerTo = this.pickerTo;
+      let pickerFrom = this.pickerFrom;
+      if (selectedSystem.id) {
+        queryStr = queryStr + 'systemId='+selectedSystem.id.toString() + '&'
+      }
+      if (selectedLevel.id) {
+        queryStr = queryStr + 'levelId='+selectedLevel.id.toString() + '&'
+      }
+      if (pickerFrom) {
+        queryStr = queryStr + 'from='+ getDate(pickerFrom) + '&'
+      }
+      if (pickerTo) {
+        queryStr = queryStr + 'to='+ getDate(pickerTo)
+      }
+      let url = this.dataSourceBaseUrl + queryStr;
+      this.loadData(url);
+      function getDate(picker) {
+        let arr = picker.split('.');
+        return `${arr[1]}.${arr[0]}.${arr[2]}`
+      }
     }
   }
 }
